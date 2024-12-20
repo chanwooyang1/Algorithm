@@ -36,7 +36,11 @@ class Solution {
                 answer.add(i+1);
             }
         }
-        int[] result = answer.stream().mapToInt(Integer::intValue).toArray();
-        return result;
+        int[] result = new int[answer.size()];
+        for(int i = 0; i < answer.size(); i++){
+            result[i] = answer.get(i);
+        }
+        Arrays.sort(result);
+        return  result;
     }
 }
