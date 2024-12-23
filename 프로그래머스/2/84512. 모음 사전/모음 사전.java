@@ -1,15 +1,24 @@
+import java.util.*;
 class Solution {
+    ArrayList<String> wordList = new ArrayList<>();
     public int solution(String word) {
-        
-        char[] vowels = {'A', 'E', 'I', 'O', 'U'};
-        int[] weights = {781, 156, 31, 6, 1}; // 각 자릿수의 가중치
         int answer = 0;
-        
-        for(int i = 0; i < word.length(); i++){
-            char ch = word.charAt(i);
-            int position = new String(vowels).indexOf(ch);
-            answer += position * weights[i] + 1;
+        char[] vowels  = {'A','E','I','O','U'};
+        for(int length = 1; length <= 5; length++){
+            makeWords("", vowels, length);
         }
-        return answer;
+        Collections.sort(wordList);
+        
+        return wordList.indexOf(word) + 1;
+    }
+    
+    private void makeWords(String current, char[] vowels, int length){
+        if(length == 0){
+            wordList.add(current);
+            return;
+        }
+        for(char vowel : vowels){
+            makeWords(current + vowel, vowels, length - 1);
+        }
     }
 }
