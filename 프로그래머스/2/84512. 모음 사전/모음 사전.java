@@ -1,25 +1,15 @@
-import java.util.*;
 class Solution {
     public int solution(String word) {
-       
-        ArrayList<String> wordsList = new ArrayList<>();
+        
         char[] vowels = {'A', 'E', 'I', 'O', 'U'};
-        for(int length = 1; length <= 5; length++){
-            generateWords("", length, vowels, wordsList);
-        }
-        Collections.sort(wordsList);
-        return wordsList.indexOf(word) + 1;
+        int[] weights = {781, 156, 31, 6, 1}; // 각 자릿수의 가중치
+        int answer = 0;
         
-        
-    }
-    private void generateWords(String current, int length, char[] vowels, ArrayList<String> wordsList){
-        if(length == 0){
-            wordsList.add(current);
-            return;
+        for(int i = 0; i < word.length(); i++){
+            char ch = word.charAt(i);
+            int position = new String(vowels).indexOf(ch);
+            answer += position * weights[i] + 1;
         }
-        
-        for(char vowel : vowels){
-            generateWords(current + vowel, length - 1, vowels, wordsList);
-        }
+        return answer;
     }
 }
