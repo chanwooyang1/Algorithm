@@ -35,20 +35,20 @@ class Solution {
             for(Map.Entry<String, Integer> entry : points.entrySet()){
                 String key = entry.getKey();
                 Integer value = entry.getValue();
-                System.out.println("name: " + name+ " key: " + key+ " value: " + value);
+                
                 if(!key.equals(name)){
                     if(value > gtMap.get(key).get(name)){
                         currentPoint++;
-                        System.out.println("조건1");
+                       
                     }else if(value == gtMap.get(key).get(name) 
                              && pointMap.get(name) > pointMap.get(key)){
                         currentPoint++;
-                        System.out.println("조건2");
+                        
                     }
                 }
                 
                 
-            }System.out.println("name: " + name + " currentPoint: " + currentPoint);
+            }
             
             maxPoint = Math.max(maxPoint, currentPoint);
         }
