@@ -22,6 +22,9 @@ class Solution {
                         dp[i][j] += dp[i][j-1];
                     }
                     dp[i][j] %= 1000000007;
+                    if(dp[i][j] < 0){
+                        dp[i][j] += 1000000007;
+                    }
                 }
             }
         }
