@@ -1,6 +1,5 @@
-import sys
-input = sys.stdin.readline
-a = list(input().strip())
+
+a = list(input())
 count = 0
 
 for i in range(len(a) - 1):
