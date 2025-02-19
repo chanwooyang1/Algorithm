@@ -1,5 +1,5 @@
 
-a = list(input())
+a = input()
 count = 0
 
 for i in range(len(a) - 1):
