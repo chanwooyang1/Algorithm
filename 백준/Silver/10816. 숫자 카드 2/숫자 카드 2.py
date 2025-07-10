@@ -1,9 +1,6 @@
-import sys
-input = sys.stdin.readline
-
-n = int(input())
+N = int(input())
 a = list(map(int, input().split()))
-m = int(input())
+M = int(input())
 b = list(map(int, input().split()))
 
 dict = {}
