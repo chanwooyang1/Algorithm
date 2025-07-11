@@ -1,22 +1,16 @@
-N = int(input())
-
-for _ in range(N):
-    input_str = input()
+def VPS(s):
     stack = []
-    is_valid = True  
-
-    for char in input_str:
-        if char == '(':
-            stack.append(char)
-        elif char == ')':
-            if not stack:
-                print("NO")
-                is_valid = False 
-                break  
-            stack.pop()
-    
-    if is_valid:
-        if not stack:
-            print("YES")
+    for ch in s:
+        if ch == "(":
+            stack.append(ch)
         else:
-            print("NO")
+            if not stack:
+                return "NO"
+            else: 
+                stack.pop()
+        # print(stack)
+    if stack: return "NO"
+    else: return "YES"
+N = int(input())
+for _ in range(N):
+    print(VPS(input().strip()))
