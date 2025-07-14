@@ -1,10 +1,11 @@
 import sys
 input = sys.stdin.readline
+write = sys.stdout.write  # write를 간단하게 씀
 
 n = int(input())
 dots = [list(map(int, input().split())) for _ in range(n)]
 
-sorted_data = sorted(dots, key= lambda x: (x[1], x[0]))
+dots.sort(key=lambda x: (x[1], x[0]))
 
-for dot in sorted_data:
-    print(*dot)
+for x, y in dots:
+    write(f"{x} {y}\n")
