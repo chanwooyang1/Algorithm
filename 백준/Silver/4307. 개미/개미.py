@@ -1,27 +1,37 @@
+#  **************************************************************************  #
+#                                                                              #
+#                                                       :::    :::    :::      #
+#    Problem Number: 4307                              :+:    :+:      :+:     #
+#                                                     +:+    +:+        +:+    #
+#    By: moomsss <boj.kr/u/moomsss>                  +#+    +#+          +#+   #
+#                                                   +#+      +#+        +#+    #
+#    https://boj.kr/4307                           #+#        #+#      #+#     #
+#    Solved: 2025/08/08 16:12:15 by moomsss       ###          ###   ##.kr     #
+#                                                                              #
+#  **************************************************************************  #
 import sys
 
-def solve():
-    l, n = map(int, sys.stdin.readline().split()) # sys.stdin.readline 사용
-    
-    ant_positions = []
-    for _ in range(n):
-        ant_positions.append(int(sys.stdin.readline())) # sys.stdin.readline 사용
-    
-    min_fall_time = 0
-    max_fall_time = 0
 
-    for p in ant_positions:
-        time_to_left = p
-        time_to_right = l - p
+def solve():    
+    l, n = map(int, sys.stdin.readline().split())
+    ants = [int(sys.stdin.readline()) for _ in range(n)] 
+   
+    max_time = 0
+    min_time = 0
+    for ant in ants:
+        to_left = ant
+        to_right = l - ant
 
-        # min_fall_time: 각 개미가 가장 가까운 끝으로 갈 때의 시간 중 최댓값
-        min_fall_time = max(min_fall_time, min(time_to_left, time_to_right))
-        
-        # max_fall_time: 각 개미가 가장 먼 끝으로 갈 때의 시간 중 최댓값
-        max_fall_time = max(max_fall_time, max(time_to_left, time_to_right))
-        
-    print(min_fall_time, max_fall_time)
+        min_time = max(min_time, min(to_left, to_right))
+        max_time = max(max_time, max(to_left, to_right))
 
-T = int(sys.stdin.readline()) # sys.stdin.readline 사용
+    print(min_time, max_time)
+
+
+T = int(sys.stdin.readline())
+
 for _ in range(T):
     solve()
+    
+
+
