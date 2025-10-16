@@ -1,17 +1,15 @@
 from itertools import permutations
+
+
 def solution(k, dungeons):
-    max_count = 0
+    answer = -1
     
-    for order in permutations(dungeons):
+    for p in permutations(dungeons):
         stamina = k
         count = 0
-        for min_req, consume in order:
-            if stamina >= min_req:
-                stamina -= consume
+        for dungeon in p:
+            if stamina >= dungeon[0]:
+                stamina -= dungeon[1]
                 count += 1
-        max_count = max(max_count, count)
-    return max_count
-    
-    
-    
+        answer = max(count, answer)
     return answer
