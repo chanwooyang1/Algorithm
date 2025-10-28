@@ -1,33 +1,19 @@
-from collections import deque, defaultdict
-
-N = int(input())
+n = int(input())
 p = int(input())
+adj_list = [[] for _ in range(n + 1)]
 
-graph = defaultdict(list)
 for _ in range(p):
     a, b = map(int, input().split())
-    graph[a].append(b)
-    graph[b].append(a)  
+    adj_list[a].append(b)
+    adj_list[b].append(a)
 
-visited = [False] * (N + 1)
-
-def bfs(start):
-    q = deque()
-    q.append(start)
-    visited[start] = True
-    count = 0
+visited = [False] * (n+1)
+def dfs(node,visited):
+    visited[node] = True
     
-    
-    while q:
-        current = q.popleft()
-        if current != 1:
-        	count += 1
+    for i in adj_list[node]:
+        if not visited[i]:
+            dfs(i, visited)
+dfs(1, visited)
 
-        for neighbor in graph[current]:
-            if not visited[neighbor]:
-                visited[neighbor] = True
-                q.append(neighbor)
-                
-    return count
-
-print(bfs(1))
+print(sum(visited) - 1)
