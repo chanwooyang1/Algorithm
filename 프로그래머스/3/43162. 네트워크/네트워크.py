@@ -1,14 +1,15 @@
 def solution(n, computers):
     answer = 0
-    visited = [False] * n
-    def dfs(node, visited):
-        visited[node] = True
-        for index, connection in enumerate(computers[node]):
-            if connection == 1 and not visited[index]:
-                dfs(index, visited)
+    nodes = [False] * n
     
+    def dfs(node):
+        nodes[node] = True
+        for index, value in enumerate(computers[node]):
+            if not nodes[index] and value == 1:
+                dfs(index)
+        return
     for i in range(n):
-        if not visited[i]:
+        if not nodes[i]:
+            dfs(i)
             answer += 1
-            dfs(i, visited)
     return answer
