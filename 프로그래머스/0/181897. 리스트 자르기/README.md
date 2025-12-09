@@ -1,6 +1,6 @@
 # [level 0] 리스트 자르기 - 181897 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181897?language=python3) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181897) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 12월 09일 14:09:17
+2025년 12월 09일 14:09:59
 
 ### 문제 설명
 
