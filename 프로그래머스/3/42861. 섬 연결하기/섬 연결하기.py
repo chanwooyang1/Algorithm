@@ -1,37 +1,30 @@
 def solution(n, costs):
+    answer = 0
     costs.sort(key=lambda x : x[2])
-    parent = [i for i in range(n)]
+    parents = [i for i in range(n)]
     
-    def union(a,b):
-        p1 = find(a)
-        p2 = find(b)
     
-        if p1 < p2:
-            parent[p2] = p1
+    def union(a, b):
+        if a < b:
+            parents[b] = a
         else:
-            parent[p1] = p2
-        
-    
+            parents[a] = b
     
     def find(x):
-        if parent[x] == x:
+        if parents[x] == x:
             return x
-        parent[x] = find(parent[x])
+        parents[x] = find(parents[x])
+        return parents[x]
+    
+    for f, t, c in costs:
+        root_f = find(f)
+        root_t = find(t)
         
-        return parent[x]
-    
-    answer = 0
-    
-    
-    for f,t,c in costs:
-        if find(f) != find(t):
-            union(f,t)
+        if root_f != root_t:
+            union(root_f, root_t)
             answer += c
-            
-            
     
             
-    
-    
-    
+            
+        
     return answer
