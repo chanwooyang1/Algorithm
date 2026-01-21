@@ -1,10 +1,10 @@
 def solution(people, limit):
     answer = 0
-    sorted_people = sorted(people)
+    people.sort()
     left, right = 0, (len(people) - 1)
     
     while left <= right:
-        if sorted_people[left] + sorted_people[right] > limit:
+        if people[left] + people[right] > limit:
             answer += 1
             right -= 1
         else:
@@ -13,4 +13,3 @@ def solution(people, limit):
             left += 1
     return answer
     
-    return answer
