@@ -1,40 +1,40 @@
+from collections import defaultdict
 import math
-def time_to_minutes(s_time):
-    time, minutes = map(int, s_time.split(":"))
-    return time * 60 + minutes
+def time_to_min(time):
+    hour, minutes = time.split(":")
+    return int(hour) * 60 + int(minutes)
 
-def calculate_fee(fees, in_time, out_time):
-    if len(in_time) != len(out_time):
-        out_time.append(time_to_minutes("23:59"))
-    total_park_time = 0
-    for i in range(len(in_time)):
-        total_park_time += out_time[i] - in_time[i]
-        
-    if total_park_time <= fees[0]:
-        return fees[1]
-    else:
-        fee = fees[1] + math.ceil((total_park_time - fees[0]) / fees[2]) * fees[3]
-        return fee
- 
+
 def solution(fees, records):
     answer = []
-    cars = {}
+    car_records = defaultdict(lambda: defaultdict(list))
+    df_time, df_won, st_time, st_won = fees[0], fees[1], fees[2], fees[3]
     
-    for record in records:
-        time, car_num, direction = record.split()
-        minutes = time_to_minutes(time)
-        if car_num in cars:
-            if direction == "IN":
-                cars.get(car_num)[0].append(minutes)
-            else:
-                cars.get(car_num)[1].append(minutes)
+    for r in records:
+        time,car_id, direction = r.split()
+        time_in_min = time_to_min(time)
+        if direction == "IN":
+            car_records[car_id]["in_out_record"].append(time_in_min)
         else:
-            cars[car_num] = [[minutes],[]]    
-    
-    sorted_cars = {key: cars[key] for key in sorted(cars)}
-    for car_num, history in sorted_cars.items():
-        total_fee = calculate_fee(fees, history[0], history[1])
-        answer.append(total_fee)
-    
-    
+            tim = car_records[car_id]["in_out_record"].pop()
+            result = time_in_min - tim
+            car_records[car_id]["bills"].append(result)
+    for i in car_records.values():
+        bills = i["bills"]
+        
+        if i["in_out_record"]:
+            bills.append(time_to_min("23:59") - i["in_out_record"].pop())
+        total_time = sum(bills)
+        if total_time <= df_time:
+            
+            i["total_fee"] = df_won
+            continue
+        else:
+            i["total_fee"] = df_won + math.ceil((total_time - df_time)/ st_time) * st_won
+            
+    for car_id, record in sorted(car_records.items()):
+        answer.append(record["total_fee"])
+                
+        
+           
     return answer
