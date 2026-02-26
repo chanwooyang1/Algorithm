@@ -1,11 +1,15 @@
-from collections import Counter
+from collections import defaultdict
 
 def solution(clothes):
-    # 각 종류별(kind) 개수를 자동으로 세줌
-    counter = Counter([kind for name, kind in clothes])
     
+    clothes_dict = defaultdict(list)
+    
+    for name, category in clothes:
+        clothes_dict[category].append(name)
     answer = 1
-    for count in counter.values():
-        answer *= (count + 1)
-        
+    print(clothes_dict)
+    for key, value in clothes_dict.items():
+        count = len(value) + 1
+        answer *= count
     return answer - 1
+    
